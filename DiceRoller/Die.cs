@@ -16,8 +16,9 @@ public class Die
     /// Ceates a new instance of the Die class with the specified number of sides.
     /// </summary>
     /// <param name="numSides">
-    /// The sides must be more than 0
+    /// The number of sides on the die. The sides must be more than 0
     /// </param>
+    /// <exception cref="ArgumentOutOfRangeException"> Thrown when the number of sides provided is invalid. </exception>
     public Die(byte numSides)
     {
         if (numSides == 0 || numSides > 20)
@@ -31,5 +32,20 @@ public class Die
     /// <summary>
     /// Gets or sets the number of sides of the die.
     /// </summary>
-    public byte NumberOfSides { get; set; }
+    public byte NumberOfSides { get; private set; }
+
+    /// <summary>
+    /// The current value that is facing up on the die.
+    /// </summary>
+    public byte FaceUpValue { get; private set; }
+
+
+    /// <summary>
+    /// Simulates rolling the die and returns the value that is facing up.
+    /// </summary>
+    public void Roll()
+    {
+        Random rand = new();
+        FaceUpValue = Convert.ToByte(rand.Next(1, NumberOfSides + 1));
+    }
 }
